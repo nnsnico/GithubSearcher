@@ -1,7 +1,9 @@
-package com.github.intern.yuji.githubsearcher;
+package com.github.intern.yuji.githubsearcher.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.github.intern.yuji.githubsearcher.R;
 
 public class MainActivity extends AppCompatActivity {
 
