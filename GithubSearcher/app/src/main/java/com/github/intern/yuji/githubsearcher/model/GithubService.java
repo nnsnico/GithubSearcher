@@ -15,5 +15,5 @@ public interface GithubService {
      * @param query 絞り込みを行う文字列
      * */
     @GET("search/repositories?sort=stars&order=desc")
-    Observable<GithubRepository> listRepos(@Query("q") String query);
+    Observable<GithubRepository> getRepos(@Query("q") String query);
 }
