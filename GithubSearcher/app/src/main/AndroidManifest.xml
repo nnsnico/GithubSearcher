@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:authorities="com.github.intern.yuji.githubsearcher.view.component.SuggestionProvider"
+            android:name=".view.component.SuggestionProvider"/>
+        
         <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
