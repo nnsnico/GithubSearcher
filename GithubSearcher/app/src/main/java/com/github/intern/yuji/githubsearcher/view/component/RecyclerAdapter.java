@@ -37,6 +37,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     @Override
     public int getItemCount() {
-        return entities.size();
+        if (entities != null) {
+            return entities.size();
+        }
+        return 0;
     }
 }
