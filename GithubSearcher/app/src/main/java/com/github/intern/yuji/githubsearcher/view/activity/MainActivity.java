@@ -1,5 +1,7 @@
 package com.github.intern.yuji.githubsearcher.view.activity;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,10 +26,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         super.onCreate(savedInstanceState);
         GithubService service = GithubClient.githubApiBuilder();
         MainActivityViewModel viewModel = new MainActivityViewModel(this, service);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding =
+                DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(viewModel);
 
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        binding.searchView.setIconified(false);
+        binding.recyclerView.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new RecyclerAdapter();
         binding.recyclerView.setAdapter(adapter);
     }
