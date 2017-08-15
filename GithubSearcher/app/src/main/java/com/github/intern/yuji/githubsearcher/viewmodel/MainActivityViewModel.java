@@ -1,9 +1,12 @@
 package com.github.intern.yuji.githubsearcher.viewmodel;
 
+import android.databinding.BindingMethod;
+import android.databinding.BindingMethods;
 import android.databinding.ObservableInt;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.github.intern.yuji.githubsearcher.contract.MainActivityContract;
 import com.github.intern.yuji.githubsearcher.model.GithubRepository;
@@ -21,6 +24,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by nns on 2017/08/15.
  */
+@BindingMethods({
+        @BindingMethod(type = SearchView.class, attribute = "android:onQueryTextSubmit", method = "setOnQueryTextListener"),
+        @BindingMethod(type = SearchView.class, attribute = "android:onQueryTextChange", method = "setOnQueryTextListener")})
 public class MainActivityViewModel {
     public final ObservableInt progressBarVisibility = new ObservableInt(View.VISIBLE);
     private GithubService service;
@@ -30,7 +36,6 @@ public class MainActivityViewModel {
         this.contract = contract;
         this.service = service;
 
-        loadRepositories("android");
     }
 
     private void loadRepositories(String keywords) {
@@ -65,5 +70,14 @@ public class MainActivityViewModel {
                     public void onComplete() {
                     }
                 });
+    }
+
+    public boolean onQuerySubmit(String query) {
+        loadRepositories(query);
+        return true;
+    }
+
+    public boolean onQueryChange(String next) {
+        return false;
     }
 }
