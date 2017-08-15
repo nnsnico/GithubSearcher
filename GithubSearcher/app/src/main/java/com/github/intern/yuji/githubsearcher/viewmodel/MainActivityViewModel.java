@@ -28,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
         @BindingMethod(type = SearchView.class, attribute = "android:onQueryTextSubmit", method = "setOnQueryTextListener"),
         @BindingMethod(type = SearchView.class, attribute = "android:onQueryTextChange", method = "setOnQueryTextListener")})
 public class MainActivityViewModel {
-    public final ObservableInt progressBarVisibility = new ObservableInt(View.VISIBLE);
+    public final ObservableInt progressBarVisibility = new ObservableInt(View.GONE);
     private GithubService service;
     private MainActivityContract contract;
 
@@ -36,6 +36,7 @@ public class MainActivityViewModel {
         this.contract = contract;
         this.service = service;
 
+        loadRepositories("android");
     }
 
     private void loadRepositories(String keywords) {
