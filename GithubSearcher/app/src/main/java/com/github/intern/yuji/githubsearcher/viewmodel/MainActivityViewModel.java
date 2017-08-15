@@ -2,14 +2,12 @@ package com.github.intern.yuji.githubsearcher.viewmodel;
 
 import android.databinding.ObservableInt;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 
 import com.github.intern.yuji.githubsearcher.contract.MainActivityContract;
 import com.github.intern.yuji.githubsearcher.model.GithubRepository;
 import com.github.intern.yuji.githubsearcher.model.GithubService;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.Calendar;
 
@@ -23,7 +21,6 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by nns on 2017/08/15.
  */
-
 public class MainActivityViewModel {
     public final ObservableInt progressBarVisibility = new ObservableInt(View.VISIBLE);
     private GithubService service;
@@ -32,6 +29,8 @@ public class MainActivityViewModel {
     public MainActivityViewModel(MainActivityContract contract, GithubService service) {
         this.contract = contract;
         this.service = service;
+
+        loadRepositories("android");
     }
 
     private void loadRepositories(String keywords) {
@@ -41,19 +40,19 @@ public class MainActivityViewModel {
         calendar.add(Calendar.DAY_OF_MONTH, -7);
         String text = DateFormat.format("yyyy-MM-dd", calendar).toString();
         // 非同期通信でリポジトリを取得
-        Observable<GithubRepository> observable = service.getRepos(keywords + " " + "created:>" + text);
-        observable
+        Observable<GithubRepository> repos = service.getRepos(keywords + "+" + "created:>" + text);
+        repos
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GithubRepository>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
                     public void onNext(@NonNull GithubRepository githubRepository) {
                         progressBarVisibility.set(View.GONE);
+                        Log.d("hoge", githubRepository.toString());
                         contract.showRepository(githubRepository);
                     }
 
@@ -64,7 +63,6 @@ public class MainActivityViewModel {
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
