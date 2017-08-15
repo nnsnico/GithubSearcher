@@ -22,16 +22,16 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/created_date"
+                android:id="@+id/star_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@{entity.createdDate}"
+                android:text="@{entity.stargazers_count}"
                 android:textSize="14sp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="2017/8/13"/>
+                tools:text="3"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -46,14 +46,16 @@
                 tools:text="hogehogehoge"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@{entity.description}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 tools:text="ここにリポジトリの内容が入ります"/>
 
