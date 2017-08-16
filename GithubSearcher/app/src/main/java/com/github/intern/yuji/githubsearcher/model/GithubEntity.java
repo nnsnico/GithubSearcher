@@ -1,9 +1,15 @@
 package com.github.intern.yuji.githubsearcher.model;
 
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+
 /**
  * Created by nns on 2017/08/13.
  */
-public class GithubEntity {
+@SuppressLint("ParcelCreator")
+public class GithubEntity implements SearchSuggestion {
     public String description;
     public Owner owner;
     public String language;
@@ -23,6 +29,21 @@ public class GithubEntity {
         this.forks_count = forks_count;
         this.full_name = full_name;
         this.html_url = html_url;
+    }
+
+    @Override
+    public String getBody() {
+        return name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 
     class Owner {

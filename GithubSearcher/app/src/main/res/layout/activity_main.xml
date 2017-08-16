@@ -14,38 +14,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <SearchView
-            android:id="@+id/search_view"
-            android:layout_width="368dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:onQueryTextSubmit="@{viewModel.onQuerySubmit}"
-            android:onQueryTextChange="@{viewModel.onQueryChange}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </SearchView>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/main_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="0dp"
+            android:background="#d9d9d9"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_view"
-            app:layout_constraintVertical_bias="0.0">
-        </android.support.v7.widget.RecyclerView>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/parent_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                tools:context=".MainActivity">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:clipToPadding="false"
+                    android:paddingTop="60dp"/>
+
+                <com.arlib.floatingsearchview.FloatingSearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:floatingSearch_close_search_on_keyboard_dismiss="false"
+                    app:floatingSearch_dimBackground="false"
+                    app:floatingSearch_dismissOnOutsideTouch="true"
+                    app:floatingSearch_leftActionMode="showSearch"
+                    app:floatingSearch_searchBarMarginLeft="4dp"
+                    app:floatingSearch_searchBarMarginRight="4dp"
+                    app:floatingSearch_searchBarMarginTop="4dp"
+                    app:floatingSearch_searchHint="Search..."
+                    app:floatingSearch_showSearchKey="true"
+                    app:floatingSearch_suggestionsListAnimDuration="250"/>
+
+            </RelativeLayout>
+
+        </android.support.design.widget.CoordinatorLayout>
 
         <ProgressBar
-            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -56,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="@+id/main_content"/>
 
     </android.support.constraint.ConstraintLayout>
 
