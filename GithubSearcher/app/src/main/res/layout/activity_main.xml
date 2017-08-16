@@ -45,7 +45,7 @@
                     android:paddingTop="60dp"/>
 
                 <com.arlib.floatingsearchview.FloatingSearchView
-                    android:id="@+id/floating_search_view"
+                    android:id="@+id/search_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:floatingSearch_close_search_on_keyboard_dismiss="false"
